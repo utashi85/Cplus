@@ -26,9 +26,17 @@ public:
 
     vector<pair<uint16_t, uint16_t>> findMostFrequent()
     {
+        vector<pair<uint16_t, uint16_t>> result;
+
         auto maxElem = *max_element(cbegin(data), cend(data),
                                     [](auto const &a, auto const &b) { return (a.second < b.second); });
-        cout << maxElem.first << ":" << maxElem.second << endl;
+
+        for (auto x : data)
+        {
+            if (x.second == maxElem.second)
+                result.push_back(make_pair(x.first, x.second));
+        }
+        return result;
     }
 };
 
@@ -37,6 +45,12 @@ int main()
     map_c test;
     vector<uint16_t> testData{1, 1, 3, 5, 8, 13, 3, 5, 8, 8, 5};
     test.setVector(testData);
-    test.findMostFrequent();
+    vector<pair<uint16_t, uint16_t>> result = test.findMostFrequent();
+
+    for (auto x : result)
+    {
+        cout << x.first << ":" << x.second << endl;
+    }
+
     return 0;
 }
